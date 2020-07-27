@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge</title>
+</head>
+<body>
+    <script>
+        var A = [20, 15 ,35, 50, 40, 10 ,30 ,25];
+
+        A = MergeSort(A, A.length);
+        console.log(A)
+
+        function MergeSort(A, n){
+            var mid = Math.floor(n / 2);
+            var B = new Array();
+            var C = new Array();
+
+            if(n > 1){
+                B = MergeSort(A.slice(0, mid), mid);
+                C = MergeSort(A.slice(mid, n), n-mid);
+                A = merge(B, C)
+            }
+            return A;
+        }
+
+        function merge(B, C){
+            var A = new Array();
+            var i=0, j=0, k=0;
+
+            while( i < B.length && j < C.length){
+                if(B[i] >= C[j]){
+                    A[k++] = C[j++]
+                }else{
+                    A[k++] = B[i++]
+                }
+            }
+
+            for(; i < B.length ; i++){
+                A[k++] = B[i];
+            }
+            for(; j < C.length ; j++){
+                A[k++] = C[j];
+            }
+
+            return A;
+        }
+    </script>
+</body>
+</html>
